@@ -4,7 +4,6 @@ import com.pvlrs.spotifyrecommender.controller.request.TextAnalysisRequest;
 import com.pvlrs.spotifyrecommender.dto.EmotionAnalysisDto;
 import com.pvlrs.spotifyrecommender.service.EmotionAnalysisService;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +13,6 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@CrossOrigin(origins = "*") // todo: remove once deployed
 @RequestMapping("/v1/analyses")
 @RestController
 public class AnalysisController {

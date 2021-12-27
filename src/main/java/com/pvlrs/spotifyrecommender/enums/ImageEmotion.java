@@ -19,4 +19,8 @@ public enum ImageEmotion {
     ImageEmotion(String value) {
         this.value = value;
     }
+
+    public static ImageEmotion fromString(String imageEmotion) {
+        return ImageEmotion.valueOf(imageEmotion.toUpperCase());
+    }
 }

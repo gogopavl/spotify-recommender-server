@@ -14,4 +14,8 @@ public enum BasicEmotion {
     BasicEmotion(String value) {
         this.value = value;
     }
+
+    public static BasicEmotion fromString(String emotion) {
+        return BasicEmotion.valueOf(emotion.toUpperCase());
+    }
 }

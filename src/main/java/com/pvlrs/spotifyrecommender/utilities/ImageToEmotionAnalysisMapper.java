@@ -10,10 +10,12 @@ import com.pvlrs.spotifyrecommender.exception.AnalysisException;
 import lombok.experimental.UtilityClass;
 
 import java.lang.reflect.Field;
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.pvlrs.spotifyrecommender.constants.EmotionAnalysisUserMessageTemplates.getRandomUserMessageTemplate;
 import static com.pvlrs.spotifyrecommender.enums.ImageEmotion.ANGER;
 import static com.pvlrs.spotifyrecommender.enums.ImageEmotion.CONTEMPT;
 import static com.pvlrs.spotifyrecommender.enums.ImageEmotion.DISGUST;
@@ -45,7 +47,11 @@ public class ImageToEmotionAnalysisMapper {
         float overallSentimentScore = positiveEmotionScore.get() - negativeEmotionScore.get();
         setOverallSentiment(emotionAnalysisBuilder, overallSentimentScore);
 
-        return buildInstance(emotionAnalysisBuilder, imageAnalysisDto, positiveEmotionScore, negativeEmotionScore);
+        EmotionAnalysisDto emotionAnalysisDto = buildInstance(emotionAnalysisBuilder, imageAnalysisDto,
+                positiveEmotionScore, negativeEmotionScore);
+        emotionAnalysisDto.setUserMessage(MessageFormat.format(getRandomUserMessageTemplate(),
+                emotionAnalysisDto.getOverallSentiment()));
+        return emotionAnalysisDto;
     }
 
     private static void calculateBasicEmotionScores(ImageAnalysisDto imageAnalysisDto,
@@ -58,7 +64,7 @@ public class ImageToEmotionAnalysisMapper {
             try {
                 emotion.setAccessible(true);
                 // valueOf is case-sensitive
-                ImageEmotion imageEmotion = ImageEmotion.valueOf(emotion.getName().toUpperCase());
+                ImageEmotion imageEmotion = ImageEmotion.fromString(emotion.getName());
                 Float emotionValue = (Float) emotion.get(emotionAttributes);
                 if (negativeEmotions.contains(imageEmotion)) {
                     negativeEmotionScore.updateAndGet(value -> value + emotionValue);
