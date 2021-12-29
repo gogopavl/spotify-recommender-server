@@ -104,10 +104,6 @@ public class ImageToEmotionAnalysisMapper {
                 .fear(emotionAttributes.getFear())
                 .happiness(emotionAttributes.getHappiness())
                 .sadness(emotionAttributes.getSadness())
-                .surprise(emotionAttributes.getSurprise())
-                // Basic emotions
-                .neutral(emotionAttributes.getNeutral())
-                .negative(negativeEmotionScore.get())
-                .positive(positiveEmotionScore.get()).build();
+                .surprise(emotionAttributes.getSurprise()).build();
     }
 }
