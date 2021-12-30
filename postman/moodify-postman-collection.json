@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "ad359f2a-fdae-43bd-b065-dd86035acbbc",
+		"name": "Moodify API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "recommender-server",
+			"item": [
+				{
+					"name": "Playlists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{REC_SERVER_URL}}/v1/playlists",
+							"host": [
+								"{{REC_SERVER_URL}}"
+							],
+							"path": [
+								"v1",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Random playlist by emotion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{REC_SERVER_URL}}/v1/playlists/:emotion",
+							"host": [
+								"{{REC_SERVER_URL}}"
+							],
+							"path": [
+								"v1",
+								"playlists",
+								":emotion"
+							],
+							"variable": [
+								{
+									"key": "emotion",
+									"value": "positive"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Playlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"2YIMZ5uCbjImMVBOaC9oJL\",\n    \"name\": \"Coding\",\n    \"description\": \"while ( coding ) { continue; }\",\n    \"imageUrl\": \"https://i.scdn.co/image/ab67706c0000bebb916254681d256fb5ffca76b2\",\n    \"spotifyUrl\": \"https://open.spotify.com/playlist/2YIMZ5uCbjImMVBOaC9oJL\",\n    \"emotions\": [\n        \"POSITIVE\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{REC_SERVER_URL}}/v1/playlists",
+							"host": [
+								"{{REC_SERVER_URL}}"
+							],
+							"path": [
+								"v1",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Analyze face",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/octet-stream",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/Users/gogopavl/Downloads/faces/surprised.jpg"
+							}
+						},
+						"url": {
+							"raw": "{{REC_SERVER_URL}}/v1/analyses",
+							"host": [
+								"{{REC_SERVER_URL}}"
+							],
+							"path": [
+								"v1",
+								"analyses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Analyze text",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"I feel great today!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{REC_SERVER_URL}}/v1/analyses",
+							"host": [
+								"{{REC_SERVER_URL}}"
+							],
+							"path": [
+								"v1",
+								"analyses"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
