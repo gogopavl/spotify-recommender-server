@@ -1,12 +1,14 @@
 package com.pvlrs.spotifyrecommender.service;
 
 import com.pvlrs.spotifyrecommender.client.SpotifyClient;
+import com.pvlrs.spotifyrecommender.constants.CacheSpaces;
 import com.pvlrs.spotifyrecommender.controller.request.PlaylistRequest;
 import com.pvlrs.spotifyrecommender.domain.cosmos.Playlist;
 import com.pvlrs.spotifyrecommender.dto.PlaylistsDto;
 import com.pvlrs.spotifyrecommender.dto.PlaylistsDto.PlaylistDto;
 import com.pvlrs.spotifyrecommender.enums.BasicEmotion;
 import com.pvlrs.spotifyrecommender.repository.PlaylistRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ public class PlaylistService {
         playlistRepository.save(Playlist.fromPlaylistRequest(request));
     }
 
+    @Cacheable(CacheSpaces.PLAYLISTS)
     public PlaylistsDto getAllPlaylists() {
         List<PlaylistDto> playlistDtos = new ArrayList<>();
         playlistRepository.findAll()
